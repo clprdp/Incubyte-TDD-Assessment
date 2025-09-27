@@ -50,6 +50,17 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("4,5\n6")
         self.assertEqual(result, 15)
+    
+    def test_custom_delimiters(self):
+        """Test custom delimiters with format '//[delimiter]\\n[numbers...]'"""
+        result = self.calculator.add("//;\n1;2")
+        self.assertEqual(result, 3)
+        
+        result = self.calculator.add("//|\n3|4|5")
+        self.assertEqual(result, 12)
+        
+        result = self.calculator.add("//***\n1***2***3")
+        self.assertEqual(result, 6)
 
 
 if __name__ == '__main__':
