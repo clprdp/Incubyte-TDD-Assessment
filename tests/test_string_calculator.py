@@ -61,6 +61,20 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("//***\n1***2***3")
         self.assertEqual(result, 6)
+    
+    def test_negative_numbers_throw_exception(self):
+        """Test that negative numbers throw exception with proper message"""
+        with self.assertRaises(ValueError) as context:
+            self.calculator.add("-1")
+        self.assertEqual(str(context.exception), "negative numbers not allowed -1")
+        
+        with self.assertRaises(ValueError) as context:
+            self.calculator.add("2,-4,3,-5")
+        self.assertEqual(str(context.exception), "negative numbers not allowed -4, -5")
+        
+        with self.assertRaises(ValueError) as context:
+            self.calculator.add("//;\n1;-2;3")
+        self.assertEqual(str(context.exception), "negative numbers not allowed -2")
 
 
 if __name__ == '__main__':

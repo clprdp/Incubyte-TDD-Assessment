@@ -13,4 +13,10 @@ class StringCalculator:
         
         numbers = numbers.replace('\n', ',')
         number_list = numbers.split(',')
+        
+        negative_numbers = [num for num in number_list if num.startswith('-') and num != '-']
+        if negative_numbers:
+            message = "negative numbers not allowed " + ", ".join(negative_numbers)
+            raise ValueError(message)
+        
         return sum(int(num) for num in number_list)
