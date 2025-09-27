@@ -39,6 +39,17 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("5,10,15,20,25")
         self.assertEqual(result, 75)
+    
+    def test_newlines_as_delimiters(self):
+        """Test that newlines can be used as delimiters"""
+        result = self.calculator.add("1\n2,3")
+        self.assertEqual(result, 6)
+        
+        result = self.calculator.add("1\n2\n3")
+        self.assertEqual(result, 6)
+        
+        result = self.calculator.add("4,5\n6")
+        self.assertEqual(result, 15)
 
 
 if __name__ == '__main__':
