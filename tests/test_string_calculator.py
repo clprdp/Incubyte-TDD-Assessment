@@ -15,6 +15,14 @@ class TestStringCalculator(unittest.TestCase):
         """Test that an empty string returns 0"""
         result = self.calculator.add("")
         self.assertEqual(result, 0)
+    
+    def test_single_number_returns_that_number(self):
+        """Test that a single number returns itself"""
+        result = self.calculator.add("1")
+        self.assertEqual(result, 1)
+        
+        result = self.calculator.add("5")
+        self.assertEqual(result, 5)
 
 
 if __name__ == '__main__':
