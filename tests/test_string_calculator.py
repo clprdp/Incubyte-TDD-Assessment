@@ -23,6 +23,14 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("5")
         self.assertEqual(result, 5)
+    
+    def test_two_comma_separated_numbers(self):
+        """Test that two comma-separated numbers return their sum"""
+        result = self.calculator.add("1,5")
+        self.assertEqual(result, 6)
+        
+        result = self.calculator.add("2,3")
+        self.assertEqual(result, 5)
 
 
 if __name__ == '__main__':
