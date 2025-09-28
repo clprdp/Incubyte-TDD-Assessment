@@ -19,4 +19,6 @@ class StringCalculator:
             message = "negative numbers not allowed " + ", ".join(negative_numbers)
             raise ValueError(message)
         
-        return sum(int(num) for num in number_list)
+        # Filter out numbers bigger than 1000
+        valid_numbers = [int(num) for num in number_list if int(num) <= 1000]
+        return sum(valid_numbers)

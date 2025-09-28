@@ -75,6 +75,17 @@ class TestStringCalculator(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             self.calculator.add("//;\n1;-2;3")
         self.assertEqual(str(context.exception), "negative numbers not allowed -2")
+    
+    def test_numbers_bigger_than_1000_ignored(self):
+        """Test that numbers bigger than 1000 are ignored in the sum"""
+        result = self.calculator.add("2,1001")
+        self.assertEqual(result, 2)
+        
+        result = self.calculator.add("1000,1001,2")
+        self.assertEqual(result, 1002)  # 1000 + 2, 1001 ignored
+        
+        result = self.calculator.add("//;\n2000;1;2000;3")
+        self.assertEqual(result, 4)  # Only 1 + 3, both 2000s ignored
 
 
 if __name__ == '__main__':
