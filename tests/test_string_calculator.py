@@ -97,6 +97,17 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("//[a][b][c]\n1a2b3c4")
         self.assertEqual(result, 10)
+    
+    def test_multiple_long_delimiters(self):
+        """Test support for multiple long delimiters"""
+        result = self.calculator.add("//[***][%%%]\n1***2%%%3")
+        self.assertEqual(result, 6)
+        
+        result = self.calculator.add("//[abc][def]\n4abc5def6")
+        self.assertEqual(result, 15)
+        
+        result = self.calculator.add("//[::][--][++]\n1::2--3++4")
+        self.assertEqual(result, 10)
 
 
 if __name__ == '__main__':
