@@ -8,8 +8,20 @@ class StringCalculator:
             lines = numbers.split('\n', 1)
             delimiter_line = lines[0]
             numbers_part = lines[1] if len(lines) > 1 else ""
-            delimiter = delimiter_line[2:]
-            numbers = numbers_part.replace(delimiter, ',')
+            delimiter_spec = delimiter_line[2:]
+            
+            # checking for multiple delimiters format => [delim1][delim2]...
+            if delimiter_spec.startswith('[') and delimiter_spec.endswith(']'):
+                import re
+                # getting all delimiters b/w []
+                delimiters = re.findall(r'\[(.*?)\]', delimiter_spec)
+                numbers = numbers_part
+                
+                for delimiter in delimiters:
+                    numbers = numbers.replace(delimiter, ',')
+            else:
+                delimiter = delimiter_spec
+                numbers = numbers_part.replace(delimiter, ',')
         
         numbers = numbers.replace('\n', ',')
         number_list = numbers.split(',')
@@ -19,6 +31,6 @@ class StringCalculator:
             message = "negative numbers not allowed " + ", ".join(negative_numbers)
             raise ValueError(message)
         
-        # Filter out numbers bigger than 1000
+        
         valid_numbers = [int(num) for num in number_list if int(num) <= 1000]
         return sum(valid_numbers)

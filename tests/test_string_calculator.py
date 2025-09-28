@@ -86,6 +86,17 @@ class TestStringCalculator(unittest.TestCase):
         
         result = self.calculator.add("//;\n2000;1;2000;3")
         self.assertEqual(result, 4)  # Only 1 + 3, both 2000s ignored
+    
+    def test_multiple_delimiters(self):
+        """Test support for multiple delimiters using [delim1][delim2] format"""
+        result = self.calculator.add("//[*][%]\n1*2%3")
+        self.assertEqual(result, 6)
+        
+        result = self.calculator.add("//[;][|]\n4;5|6")
+        self.assertEqual(result, 15)
+        
+        result = self.calculator.add("//[a][b][c]\n1a2b3c4")
+        self.assertEqual(result, 10)
 
 
 if __name__ == '__main__':
